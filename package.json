@@ -1,0 +1,29 @@
+{
+  "name": "distiller",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./src/es5/scrapper.js",
+  "scripts": {
+    "start": "npm run build && node --use_strict es5/scrapper.js",
+    "dev": "nodemon --exec babel-node --use_strict es6/scrapper.js",
+    "build": "babel es6 --out-dir es5 --source-maps",
+    "watch": "babel es6 --out-dir es5 --source-maps --watch",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+  },
+  "author": "Mike Chen",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "express": "^4.15.2",
+    "node-readability": "^2.2.0",
+    "request": "^2.81.0",
+    "retext-keywords": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.23.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "flow-bin": "^0.41.0"
+  }
+}

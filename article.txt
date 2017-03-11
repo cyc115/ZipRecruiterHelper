@@ -1,0 +1,79 @@
+<div class="job_content"><span>
+      
+      </span><div class="job_characteristics"><span>
+
+                  </span><h3>Compensation</h3>
+            <span>$45 to $55 Hourly</span>
+            <span itemprop="baseSalary" itemscope="" itemtype="https://schema.org/MonetaryAmount">
+                              <span itemprop="currency">USD</span>
+                            <span itemprop="value" itemscope="" itemtype="https://schema.org/QuantitativeValue">
+                                  <span itemprop="minValue">45.000000000000</span>
+                  <span itemprop="maxValue">55.000000000000</span>
+                                                                                  <span itemprop="unitText">HOUR </span>
+                              </span>
+            </span>
+          <span>
+
+                  </span><h3>Benefits Offered</h3>
+            <span itemprop="jobBenefits">
+              Medical, Dental, 401K
+            </span>
+          <span>
+
+                  </span><h3>Employment Type</h3>
+              <span>Contractor</span>
+              <span itemprop="employmentType">CONTRACTOR</span>
+          <span>
+
+      </span></div><span>
+      
+
+      
+      </span><div class="jobDescriptionSection"><span>
+        </span><div itemprop="description"><p>Title: JSON/REST Developer - No C2C / 1099</p><p>Location: Orlando, Florida</p><p>Duration: 5 Months</p><p>Salary: $45 - $55 hr</p><p>**This is a Developer to develop REST based APIs**</p><p>Develop the micro services integration vision in an agile fast paced environment using the latest integration technology.</p><p>The ideal candidate will be able to take ownership of design/integration solutions and effectively communicate the solutions to peers.</p><p>• Required 2+ years JavaScript</p><p>• Required 5+ years in rest services development</p><p>• Required 3+ years with Node.js</p><p>• 3+ years with REST JSON services design.</p></div><span>
+                  </span><span itemprop="industry">Hospitality/Restaurant</span><span>
+              </span></div><span>
+
+      
+      
+        </span><div class="logo_wrap"><span>
+          </span><a href="https://www.ziprecruiter.com/jobs/ektello-986f3494" title="View all job openings at ektello"><img src="https://d3aref2hpyyy3b.cloudfront.net/80x80/http://s3.amazonaws.com/public-ziprecruiter/uploads/388b5a13.jpg" alt="ektello"></a><span>
+        </span></div><span>
+      
+      
+
+      
+      
+        </span><div class="companyDescriptionSection" itemprop="hiringOrganization" itemtype="http://schema.org/Organization" itemscope=""><span>
+          </span><h3 class="subheadline">About <span itemprop="name">ektello</span>:</h3><span>
+          </span><p itemprop="description" itemtype="http://schema.org/description">ektello is a national staffing firm that places Creative, Marketing, Digital and Information Technology talent. With a team of experienced industry veterans we have developed a global network to ensure great service for our talent network and our clients. We provide business savvy, creative and technically proficient individuals with great opportunities to grow their careers.  <br>At ektello, we are all about delivering the best experience for both our talent and clients. Our goal is to create the most seamless career search and hiring process, while always providing the most experienced talent. <br>We believe that each person brings a unique set of skills and each position requires the same.  <br>Our Talent is Connecting the two! <br>ektello...Experience Delivered <br>Check out a full list of job opportunities: http://ektello.com/search-jobs/</p><span>
+        </span></div><span>
+      
+      
+
+      
+      
+        </span><p class="company_jobs">
+          <i class="fa fa-building job_details_icon"></i> <a href="https://www.ziprecruiter.com/jobs/ektello-986f3494"> All Jobs at ektello</a>
+          
+            <i class="fa fa-globe job_details_icon"></i> <a href="http://www.ektello.com/" target="_blank" title="View company website in new tab" rel="nofollow">http://www.ektello.com</a>
+          
+        </p><span>
+      
+      
+
+      
+      
+
+      
+      </span><p class="posted_and_taxonomy">
+        <span class="posted_date">
+          Posted 5 hours ago
+          <span itemprop="datePosted" itemtype="https://schema.org/datePosted">
+            2017-03-10T13:04:47Z
+          </span>
+        </span>
+      </p><span>
+      
+
+    </span></div>

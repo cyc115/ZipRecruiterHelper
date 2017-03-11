@@ -1,0 +1,13 @@
+{
+  "title" : "Software Engineer", 
+  "company" : "company Name", 
+  "state" : "NY", 
+  "city" : "Rosyln Height",
+  "zip" : "46801",
+  "keywords" : ["react", "node" ],
+  "originalLink" : "link to job site",
+  "applyLink" : "link to apply",
+  "experience" : "0-5",
+  "positionType" : "full-time",
+  "descriptions" : "stuff stuff stuff "
+}
