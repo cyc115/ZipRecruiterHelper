@@ -3,7 +3,7 @@ import fs from 'fs';
 import cheerio from 'cheerio';
 import request from 'request';
 import urljoin from 'url-join'
-
+import {scrapSFTags} from './StackOverFlow'
 'use-strict'
 
 // @flow
@@ -30,15 +30,17 @@ type JobPage = {
 
 const baseUrl = 'https://www.ziprecruiter.com/candidate/search?'
 
-let url = "https://www.ziprecruiter.com/candidate/search?days=9&refine_by_title=Software%20Engineer&search=Software%20Development"
-let url2 = "https://www.ziprecruiter.com/candidate/search?days=9&refine_by_title=Software%20Engineer&page=50&search=Software%20Development"
-
 //genQueryUrl => getJobListFromUrl while does not return 0
 
-getJobListFromUrl(genQueryUrl("fullstack", 1, 1))
+/*getJobListFromUrl(genQueryUrl("fullstack", 1, 1))
     .then((jobs) => {
         console.log(jobs.length);
     })
+*/
+
+
+
+
 
 export function genQueryUrl(
     search: string = "Software Engineer",
