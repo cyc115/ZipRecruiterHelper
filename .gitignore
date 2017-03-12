@@ -1,5 +1,6 @@
 temp.html
-
+*.html
+.env
 # Created by https://www.gitignore.io/api/node
 
 ### Node ###

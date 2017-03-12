@@ -4,7 +4,7 @@ import * as zipRecruiter from './scrapper'
 import read from 'node-readability'
 
 
-let url = zipRecruiter.genQueryUrl('fullstack', 7, 1)
+let url = zipRecruiter.genQueryUrl('fullstack', 3, 1)
 let tags = JSON.parse(fs.readFileSync('./tags.json', 'utf8'))
 
 zipRecruiter
