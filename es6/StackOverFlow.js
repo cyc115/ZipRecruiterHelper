@@ -4,14 +4,19 @@ import request from 'request';
 import urljoin from 'url-join'
 
 // @flow 
-
 /*
 scrapSFTags(10)
-    .then(tags => {
-        console.log(tags)
-        fs.writeFile('tags.json', JSON.stringify(tags), () => { })
-    })*/
+  .then(tags => {
+    tags = tags.map(t => {
+       t = t.replace('-', ' ')
+       t = t.replace('.js', '')
+       return t
+    })
 
+    console.log(tags)
+    fs.writeFile('tags.json', JSON.stringify(tags), () => { })
+  })
+*/
 /**
  * Scrape pages * 36 tags from the stackover flow tag list,
  * starting from the most popular to least popular.
@@ -34,7 +39,7 @@ export function scrapSFTags(pages = 1): Promise<string[]> {
           rej(err)
         }
         else {
-          fs.writeFileSync('temp.html', html)
+          //fs.writeFileSync('temp.html', html)
           res(html)
         }
       })
@@ -55,10 +60,10 @@ export function scrapSFTags(pages = 1): Promise<string[]> {
 
   return Promise.all(promises)
     .then(arr => {
-      console.log(arr.length);
       arr.forEach((v, i) => {
         tags.push(...v)
       })
+      console.log(tags.length)
       return Promise.resolve(tags)
     })
 }
