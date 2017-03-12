@@ -1,25 +1,44 @@
 'use strict'
-
-var read = require('node-readability')
-var fs = require('fs')
-//var retext = require('retext')
-//var keywords = requier('retext-keywords')
-//var nlcstToString = require('nlcst-to-string')
+import fs from 'fs'
+import * as zipRecruiter from './scrapper'
+import read from 'node-readability'
 
 
-var urls = [
-  'http://stackoverflow.com/jobs/133420/lead-software-engineer-wazer',
-  'https://www.ziprecruiter.com/jobs/ektello-986f3494/software-developer-no-c2c-1099-a4eb71f1?source=ziprecruiter-jobs-site',
-  "https://www.dice.com/jobs/detail/Software-Engineer-4-NORTHROP-GRUMMAN-San-Diego-CA-92101/ngitbot/17005426?icid=sr1-1p&q=software%20engineer&l=San%20Diego,%20CA"
-]
+let url = zipRecruiter.genQueryUrl('fullstack', 7, 1)
+let tags = JSON.parse(fs.readFileSync('./tags.json', 'utf8'))
 
+zipRecruiter
+  .getJobListFromUrl(url)
+  .then(jobs => {
+    let pArray: Promise[] = [] //resolve when we have requested all jobs
 
-read(urls[2],
-  (err, article, meta) => {
-    fs.writeFile('article.html', article.content, 'utf8', () => console.log('completed'))
+    //iterate through the job list to get detailed job descriptions and keywords
+    jobs.forEach((job, idx) => {
+      let p = zipRecruiter
+        .getJobDescriptionHTML(job.link)  //get the job description html
+        .then(zipRecruiter.textTransform.removeHTMLTags)  //remove tags
+        .then(zipRecruiter.textTransform.toLower)  //convert to lower case 
+        .then(description => {
+          //keywords and its appared frequency
+          job.keywords = zipRecruiter.matchTags(description, tags)
+          job.descriptions = description
 
-    console.log(article.title);
-    console.log(article.document);
-    //console.log('meta', meta);
+          return Promise.resolve()
+        }).catch(console.err)
+
+      pArray.push(p)
+    })
+
+    Promise.all(pArray)
+      .then(() => {
+
+        console.log('----')
+        jobs.forEach((j, idx) => {
+          console.log(j.title);
+          console.log(j.keywords.map(v => v.keyword));
+        })
+      })
+      .catch(console.err)
 
   })
+  .catch(console.err)

@@ -4,8 +4,8 @@
   "description": "",
   "main": "./src/es5/scrapper.js",
   "scripts": {
-    "start": "npm run build && node --use_strict es5/scrapper.js",
-    "dev": "nodemon --exec babel-node --use_strict es6/scrapper.js",
+    "start": "npm run build && node --use_strict es5/index.js",
+    "dev": "nodemon --exec babel-node --use_strict es6/index.js",
     "build": "babel es6 --out-dir es5 --source-maps",
     "watch": "babel es6 --out-dir es5 --source-maps --watch",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"

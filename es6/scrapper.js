@@ -3,12 +3,13 @@ import fs from 'fs';
 import cheerio from 'cheerio';
 import request from 'request';
 import urljoin from 'url-join'
-import { scrapSFTags } from './StackOverFlow'
+var read = require('node-readability');
+
 'use-strict'
 
 // @flow
 
-const baseUrl = 'https://www.ziprecruiter.com/candidate/search?'
+const baseUrl = 'https://www.ziprecruiter.com/candidate/'
 
 //genQueryUrl => getJobListFromUrl while does not return 0
 
@@ -18,13 +19,6 @@ getJobListFromUrl(
     .then((jobs) => {
         console.log(jobs.length);
     })
-*/
-
-let url = [
-    "https://www.ziprecruiter.com/jobs/callfire-inc-3b8907f3/software-engineer-a43919d5?source=ziprecruiter_suggestedjobs_us",
-    "https://www.ziprecruiter.com/jobs/sdhrc-2324525c/devops-engineer-cicd-focus-bcd545c7?source=ziprecruiter_suggestedjobs_us"
-]
-
 
 
 getJobDescriptionHTML(url[0])
@@ -36,17 +30,18 @@ getJobDescriptionHTML(url[0])
         console.time('matchTags')
         let kwds = matchTags(txt, tags)
         console.timeEnd('matchTags')
-
         console.log(kwds);
     })
+*/
 
 function toLower(str: string): string {
     return str.toLowerCase()
 }
 
 function removeHTMLTags(str: string): string {
-    return str.replace(/<\/?[a-z]+>/ig, ' ')
+    return str.replace(/<.*>/ig, ' ')
 }
+
 
 /**
  * Find a list of keyords in text
@@ -56,6 +51,7 @@ function removeHTMLTags(str: string): string {
  */
 export function matchTags(text: string, keywords: string[]): keywordFrequencyPair[] {
     let kwds: keywordFrequencyPair[] = []
+
 
     keywords.forEach((v, i) => {
         let n = occurrences(text, v, false)
@@ -113,28 +109,49 @@ export function getJobDescriptionHTML(url: string): Promise<string> {
             let $ = cheerio.load(html)
             let description = $('div.job_description div[itemprop="description"]').html()
 
-            resolve(description)
+            // sometimes the link provided extends to an external site
+            // if so then use redability to parse the page
+            if (description != null) {
+                resolve(description)
+            }
+            else {
+                read(url, (err, article, meta) => {
+                    if (err) {
+                        reject(err)
+                    }
+                    article.html == null ? resolve('') : resolve(article.html)
+                })
+            }
         })
     })
 
     return descriptionPromise
 }
 
-
+/**
+ * Generate zipRecruiter search url given query terms 
+ * @param {*string} search 
+ * @param {*number} days 
+ * @param {*number} page 
+ */
 export function genQueryUrl(
     search: string = "Software Engineer",
     days: number = 7,
     page: number = 1
 ): string {
     let url: string = urljoin(baseUrl,
-        `days=>${days}`,
-        `&search=${encodeURIComponent(search.trim())}`,
-        `&page=${page}`
+        `search?&search=${encodeURIComponent(search.trim())}`,
+        `&page=${page}`,
+        `&days=${days}`
     )
 
     return url
 }
 
+/**
+ * Returns an array of JobItems for the search url
+ * @param {*string} url url generated from ${genQueryUrl} 
+ */
 export function getJobListFromUrl(url: string): Promise<JobItem[]> {
     let getListOfJob = new Promise((resolve, reject) => {
         request(url, (err, res, html) => {
@@ -179,13 +196,17 @@ export function getJobListFromUrl(url: string): Promise<JobItem[]> {
 }
 
 
+export const textTransform = {
+    toLower,
+    removeHTMLTags
+}
 
 type JobItem = {
     title: string,
     company: string,
     state: string,
     city: string,
-    keywords: string[],
+    keywords: keywordFrequencyPair[],
     link: ?string,
     applyLink: ?string,
     experience: string,
@@ -205,3 +226,4 @@ type keywordFrequencyPair = {
     keyword: string,
     frequency: number
 }
+
