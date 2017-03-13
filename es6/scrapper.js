@@ -41,6 +41,9 @@ function toLower(str: string): string {
 function removeHTMLTags(str: string): string {
     return str.replace(/<.*>/ig, ' ')
 }
+function removePeriods(str: string): string {
+    return str.replace(/,/g, ' ')
+} 
 
 
 /**
@@ -198,7 +201,8 @@ export function getJobListFromUrl(url: string): Promise<JobItem[]> {
 
 export const textTransform = {
     toLower,
-    removeHTMLTags
+    removeHTMLTags,
+    removePeriods
 }
 
 type JobItem = {
@@ -224,6 +228,6 @@ type JobPage = {
 
 type keywordFrequencyPair = {
     keyword: string,
-    frequency: number
+    frequency: number,
 }
 

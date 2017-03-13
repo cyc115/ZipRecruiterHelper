@@ -18,6 +18,7 @@ zipRecruiter
         .getJobDescriptionHTML(job.link)  //get the job description html
         .then(zipRecruiter.textTransform.removeHTMLTags)  //remove tags
         .then(zipRecruiter.textTransform.toLower)  //convert to lower case 
+        .then(zipRecruiter.textTransform.removePeriods)  //remove periods
         .then(description => {
           //keywords and its appared frequency
           job.keywords = zipRecruiter.matchTags(description, tags)
