@@ -5,6 +5,15 @@ Scraps jobs from popular job sites (currently only ZipRecruiter) and automatical
 
 ## current state 
 
+### Mar 13 2017 
+implemented a cli tool that extracts keywords one url at a time 
+
+`babel-node es6/cli.js`
+
+![demo](./rec.gif)
+
+
+### Mar 11 2017
 Able to search a job title and extract relevent information including keywords from the jobs returned from the query.
 
 The first page of the search with "Fullstack" and posted in the past 3 days returns the following.
