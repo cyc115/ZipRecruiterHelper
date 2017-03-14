@@ -39,11 +39,11 @@ function toLower(str: string): string {
 }
 
 function removeHTMLTags(str: string): string {
-    return str.replace(/<.*>/ig, ' ')
+    return str.replace(/<[^>]*>/ig, ' ')
 }
 function removePeriods(str: string): string {
-    return str.replace(/,/g, ' ')
-} 
+    return str.replace(/,/g, ' ').replace(/\./g, '')
+}
 
 
 /**
@@ -52,7 +52,7 @@ function removePeriods(str: string): string {
  * @param {*string[]} keywords
  * @return return an array of keywordFrequencyPair {keyword: string , frequency : number } of keywords that exists in text
  */
-export function matchTags(text: string, keywords: string[]): keywordFrequencyPair[] {
+export function matchTags(text: string = '', keywords: string[] = []): keywordFrequencyPair[] {
     let kwds: keywordFrequencyPair[] = []
 
 
@@ -67,19 +67,25 @@ export function matchTags(text: string, keywords: string[]): keywordFrequencyPai
 }
 
 /**
- * Return the number of occurences within a string
+ * Return the number of word occurences within a string, 
  * @param {string} str 
  * @param {string} subStr 
  * @param {boolean} allowOverlapping 
  */
-function occurrences(str: string = '', subStr: string = '', allowOverlapping: boolean = false): number {
+export function occurrences(str: string = '', subStr: string = '', allowOverlapping: boolean = false): number {
 
     if (subStr.length <= 0) {
         return (str.length + 1)
     }
 
+    subStr = subStr.trim()
+    
+    //if subStr is too short, then make sure it is a word, else do nothing
+    // this is to prevent excessive matching of short keywords such as 'c' or 'ui'
     //append 1 space before and after the kwd to make sure each kwd is matched as a word
-    subStr = ' ' + subStr.trim() + ' '
+    if (subStr.length < 3) {
+        subStr = ' ' + subStr + ' '
+    }
 
     let n = 0
     let pos = 0
@@ -202,7 +208,13 @@ export function getJobListFromUrl(url: string): Promise<JobItem[]> {
 export const textTransform = {
     toLower,
     removeHTMLTags,
-    removePeriods
+    removePeriods,
+    all: function (str: string): string {
+        str = removeHTMLTags(str)
+        str = toLower(str)
+        str = removePeriods(str)
+        return str
+    }
 }
 
 type JobItem = {
