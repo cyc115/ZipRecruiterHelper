@@ -48,10 +48,11 @@ rl.on('line', function (line: string) {
               })
 
               //display the results 
-              console.log('matched keywords:')
-              console.log(matchedTags)
               console.log('unmatched keywords:')
               console.log(unmatchedTags)
+              console.log('matched keywords:')
+              console.log(matchedTags)
+
             }).catch(console.error)
 
         })
