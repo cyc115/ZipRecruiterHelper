@@ -62,7 +62,9 @@ export function matchTags(text: string = '', keywords: string[] = []): keywordFr
             kwds.push({ keyword: v, frequency: n })
         }
     })
-
+    kwds = kwds.sort((a:keywordFrequencyPair, b:keywordFrequencyPair) => {
+        return b.frequency - a.frequency
+    })
     return kwds
 }
 
@@ -79,7 +81,7 @@ export function occurrences(str: string = '', subStr: string = '', allowOverlapp
     }
 
     subStr = subStr.trim()
-    
+
     //if subStr is too short, then make sure it is a word, else do nothing
     // this is to prevent excessive matching of short keywords such as 'c' or 'ui'
     //append 1 space before and after the kwd to make sure each kwd is matched as a word
