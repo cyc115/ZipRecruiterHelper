@@ -1,13 +1,4 @@
 ☐ grab the job description
 ☐ grab the tag list from stackoverflow
-☐ 
-
-Here there, are you currently searching for jobs?
-
-Are you tired of going through job descriptions line by line to check the type of skills a position needs?
-
-If you are... 
-
-The look no more... 
-
-# (currently only work for zipRecruiter)
+✔ set up mocha for testing with flow and es6 support @done (2017-03-19, 4:17:50 PM)
+☐ better ability to extract job description.

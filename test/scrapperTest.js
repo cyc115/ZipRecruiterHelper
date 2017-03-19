@@ -1,7 +1,7 @@
 'use strict'
 
 var assert = require('assert')
-import { textTransform, occurrences, getDuplicateKwdList } from '../es6/scrapper'
+import { textTransform, occurrences} from '../es6/scrapper'
 
 describe('text transform methods', function () {
   describe('textTransform#all()', function () {
@@ -46,14 +46,6 @@ Assuming you’ve followed part 1 and configured npm run compile to compile your
     let k = occurrences(str, 'to')
     assert.equal(k, 6)
 
-  })
-})
-
-
-describe('getDuplicatedKwdList()', function () {
-  it('should return a list of duplicated pairs', function () {
-    
-    getDuplicateKwdList()
   })
 })
 

@@ -44,6 +44,9 @@ function removeHTMLTags(str: string): string {
 function removePeriods(str: string): string {
     return str.replace(/,/g, ' ').replace(/\./g, '')
 }
+function removeBackSlashes(str: string): string {
+    return str.replace('/', ' ')
+}
 
 
 /**
@@ -62,10 +65,39 @@ export function matchTags(text: string = '', keywords: string[] = []): keywordFr
             kwds.push({ keyword: v, frequency: n })
         }
     })
-    kwds = kwds.sort((a:keywordFrequencyPair, b:keywordFrequencyPair) => {
+    kwds = kwds.sort((a: keywordFrequencyPair, b: keywordFrequencyPair) => {
         return b.frequency - a.frequency
     })
+
+    //TODO remove duplicated pairs such as javascript and java
+    let duplicatedKwds = getDuplicateKwdList(keywords)
     return kwds
+}
+
+/**
+ * Match t with myTags and split the tags into matched and unmatched 
+ * @param {keywordFrequencyPair} t 
+ * @param {string[]} myTags 
+ */
+export function filterTags(t: keywordFrequencyPair, myTags: string[]): MatchPair {
+    let matchedTags: string[] = []
+    let unmatchedTags: string[] = []
+
+    //find how relevent a page is by filtering through tags important to me
+    t.forEach(tag => {
+        // the keyword matches my skills
+        if (mytags.indexOf(tag.keyword) !== -1) {
+            matchedTags.push(tag)
+        }
+        else {
+            unmatchedTags.push(tag)
+        }
+    })
+
+    return {
+        matched: matchTags,
+        unmatched: unmatchedTags
+    }
 }
 
 /**
@@ -197,7 +229,7 @@ export function getJobListFromUrl(url: string): Promise<JobItem[]> {
                 dateCreated: Date.now()
             }
             res.push(item)
-            console.log("---- " + item.title)
+            //console.log("---- " + item.title)
         })
 
         return Promise.resolve(res)
@@ -211,15 +243,17 @@ export const textTransform = {
     toLower,
     removeHTMLTags,
     removePeriods,
+    removeBackSlashes,
     all: function (str: string): string {
         str = removeHTMLTags(str)
         str = toLower(str)
         str = removePeriods(str)
+        str = removeBackSlashes(str)
         return str
     }
 }
 
-type JobItem = {
+export type JobItem = {
     title: string,
     company: string,
     state: string,
@@ -234,14 +268,18 @@ type JobItem = {
     dateCreated: number,
 }
 
-type JobPage = {
+export type JobPage = {
     jobs: JobItem[],
     prev: string,
     next: string
 }
 
-type keywordFrequencyPair = {
+export type keywordFrequencyPair = {
     keyword: string,
     frequency: number,
 }
 
+export type MatchPair = {
+    matched: keywordFrequencyPair[],
+    unmatched: keywordFrequencyPair[]
+}
